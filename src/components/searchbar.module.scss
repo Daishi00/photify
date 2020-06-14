@@ -30,19 +30,24 @@
     height: 3rem;
     background-color: #ffffff;
     border-radius: 0 0.25rem 0.25rem 0;
-
+    padding: 0;
     &:hover {
       cursor: pointer;
     }
 
-    .loupe {
-      background-image: url("./lupa.png");
-      background-size: contain;
-      background-position: center;
-      background-repeat: no-repeat;
-      width: 2rem;
-      height: 2rem;
-      padding: 0;
+    img {
+      width: 3.2rem;
+      height: 3rem;
+      padding: 0.75rem;
+      transition: filter 0.3s ease-out;
+
+      &:hover {
+        filter: invert(1);
+      }
+    }
+    .icon {
+      width: 10%;
+      height: 5rem;
     }
   }
 }

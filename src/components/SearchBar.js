@@ -10,7 +10,7 @@ const SearchBar = () => {
         className={styles.searchbar}
       ></input>
       <button className={styles.submit}>
-        <div className={styles.loupe}></div>
+        <img src={require("./lupa.png")}></img>
       </button>
     </form>
   );
