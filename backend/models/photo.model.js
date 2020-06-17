@@ -4,25 +4,25 @@ const photoSchema = new mongoose.Schema(
   {
     user: {
       type: String,
-      required: true,
+      required: true
     },
     image: {
       type: String,
-      required: true,
+      required: true
     },
     description: {
       type: String,
-      required: true,
+      required: true
     },
     tags: {
       type: String,
-      required: true,
-    },
+      required: true
+    }
   },
   {
-    timestamps: true,
+    timestamps: true
   }
 );
 
 const Photo = mongoose.model("Photo", photoSchema);
-exports.Photo = Photo;
+module.exports = Photo;

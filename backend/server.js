@@ -3,8 +3,8 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const Grid = require("gridfs-stream");
 
-const photos = require("./routes/photos/postPhoto");
-
+const postPhoto = require("./routes/photos/postPhoto");
+const getPhoto = require("./routes/photos/getPhoto");
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -29,10 +29,10 @@ mongoose
   .connect(process.env.ATLAS_URI, {
     useNewUrlParser: true,
     useCreateIndex: true,
-    useUnifiedTopology: true,
+    useUnifiedTopology: true
   })
   .then(() => console.log("Connected to db"))
-  .catch((err) => console.error("Cant connect" + err));
+  .catch(err => console.error("Cant connect" + err));
 
 const tablesRouter = require("./routes/users");
 
@@ -47,7 +47,8 @@ app.use("/images", (req, res, next) => {
 });
 
 app.use("/users", tablesRouter);
-app.use("/api/photos", photos);
+app.use("/api/photos", postPhoto);
+app.use("/api/photos", getPhoto);
 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
