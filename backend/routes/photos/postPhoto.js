@@ -9,11 +9,11 @@ const storage = new GridFsStorage({
   url: process.env.ATLAS_URI,
   file: (req, file) => {
     const fileInfo = {
-      filename: `Image: ${req.body.user}`,
-      bucketName: "Images",
+      filename: `Image: ${req.body.description}`,
+      bucketName: "Images"
     };
     return fileInfo;
-  },
+  }
 });
 
 const fileFilter = (req, file, callback) => {
@@ -25,9 +25,9 @@ const fileFilter = (req, file, callback) => {
 const upload = multer({
   storage,
   limits: {
-    fileSize: 1024 * 1024 * 5,
+    fileSize: 1024 * 1024 * 5
   },
-  fileFilter: fileFilter,
+  fileFilter: fileFilter
 });
 
 router.post(
@@ -38,7 +38,7 @@ router.post(
       user: req.body.user,
       image: req.files["image"][0].id,
       description: req.body.description,
-      tags: req.body.tags,
+      tags: req.body.tags
     });
 
     try {
