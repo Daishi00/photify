@@ -7,7 +7,7 @@ const Header = () => {
   return (
     <header>
       <div className={styles.logoContainer}>
-        <h1>poth.io</h1>
+        <h1>photify</h1>
       </div>
       <div className={styles.buttonContainer}>
         <button className={styles.button}>

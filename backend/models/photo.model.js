@@ -21,8 +21,14 @@ const photoSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
+    toObject: { virtuals: true },
+    toJSON: { virtuals: true },
   }
 );
 
+photoSchema.virtual("imgURL").get(function () {
+  return this.image ? `/Images.files/${this.image}` : null;
+});
+
 const Photo = mongoose.model("Photo", photoSchema);
-exports.Photo = Photo;
+module.exports = Photo;

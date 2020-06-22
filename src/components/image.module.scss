@@ -1,0 +1,23 @@
+.imageContainer {
+  max-width: 300px;
+  max-height: 400px;
+  display: grid;
+}
+img {
+  max-width: 300px;
+  height: 350px;
+  max-height: 350px;
+  position: relative;
+  z-index: 1;
+}
+
+.imageInfo {
+  position: absolute;
+  z-index: 2;
+
+  p {
+    margin: 0;
+    padding: 0;
+    font-size: 24px;
+  }
+}

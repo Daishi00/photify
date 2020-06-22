@@ -34,7 +34,7 @@ router.post(
   "/",
   upload.fields([{ name: "image", maxCount: 1 }]),
   async (req, res) => {
-    const photo = new photoModel.Photo({
+    const photo = new photoModel({
       user: req.body.user,
       image: req.files["image"][0].id,
       description: req.body.description,

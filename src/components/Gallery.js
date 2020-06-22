@@ -1,24 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import styles from "./gallery.module.scss";
-
+import Image from "./Image";
 const Gallery = () => {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    axios({
+      method: "GET",
+      url: `/photos`,
+    })
+      .then(async (res) => {
+        await setData(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <div className={styles.container}>
-      <div className={styles.image1}>
-        <img src={require("./photo-1.jpg")} className={styles.image}></img>
-      </div>
-      <div className={styles.image2}>
-        <img src={require("./photo-2.jpg")} className={styles.image}></img>
-      </div>
-      <div className={styles.image3}>
-        <img src={require("./photo-3.jpg")} className={styles.image}></img>
-      </div>
-      <div className={styles.image4}>
-        <img src={require("./photo-4.jpg")} className={styles.image}></img>
-      </div>
-      <div className={styles.image5}>
-        <img src={require("./photo-5.jpg")} className={styles.image}></img>
-      </div>
+      {data.map((item) => (
+        <Image imgURL={item.imgURL} user={item.user} />
+      ))}
     </div>
   );
 };

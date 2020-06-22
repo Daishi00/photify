@@ -4,6 +4,8 @@ const mongoose = require("mongoose");
 const Grid = require("gridfs-stream");
 
 const photos = require("./routes/photos/postPhoto");
+const getphotos = require("./routes/photos/getPhoto");
+const image = require("./routes/photos/getImage");
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -36,7 +38,7 @@ mongoose
 
 const tablesRouter = require("./routes/users");
 
-app.use("/images", (req, res, next) => {
+app.use("/Images.files/", (req, res, next) => {
   eval(
     `Grid.prototype.findOne = ${Grid.prototype.findOne
       .toString()
@@ -47,8 +49,9 @@ app.use("/images", (req, res, next) => {
 });
 
 app.use("/users", tablesRouter);
-app.use("/api/photos", photos);
-
+app.use("/photos", photos);
+app.use("/photos", getphotos);
+app.use("/Images.files/", image);
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
 });
