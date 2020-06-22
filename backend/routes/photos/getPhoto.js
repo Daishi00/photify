@@ -4,10 +4,11 @@ const photoModel = require("./../../models/photo.model.js");
 
 router.get("/", async (req, res) => {
   try {
-    const photos = await photoModel.find({});
-    res.status(200).json(photos);
+    console.log(photoModel.model);
+    const photos = await photoModel.find();
+    res.json(photos);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.json({ message: err });
   }
 });
 

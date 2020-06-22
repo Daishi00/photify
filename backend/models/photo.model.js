@@ -4,25 +4,31 @@ const photoSchema = new mongoose.Schema(
   {
     user: {
       type: String,
-      required: true
+      required: true,
     },
     image: {
       type: String,
-      required: true
+      required: true,
     },
     description: {
       type: String,
-      required: true
+      required: true,
     },
     tags: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   {
-    timestamps: true
+    timestamps: true,
+    toObject: { virtuals: true },
+    toJSON: { virtuals: true },
   }
 );
+
+photoSchema.virtual("imgURL").get(function () {
+  return this.image ? `/Images.files/${this.image}` : null;
+});
 
 const Photo = mongoose.model("Photo", photoSchema);
 module.exports = Photo;

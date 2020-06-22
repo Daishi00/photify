@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import style from "./app.module.scss";
 import SearchBar from "./components/SearchBar";
 import Gallery from "./components/Gallery";
+import axios from "axios";
 const App = () => {
   return (
     <div className={style.container}>

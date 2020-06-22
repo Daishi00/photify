@@ -4,10 +4,11 @@ const mongoose = require("mongoose");
 const Grid = require("gridfs-stream");
 const passport = require("passport");
 
-
 const users = require("./routes/users");
-const postPhoto = require("./routes/photos/postPhoto");
-const getPhoto = require("./routes/photos/getPhoto");
+const photos = require("./routes/photos/postPhoto");
+const getphotos = require("./routes/photos/getPhoto");
+const image = require("./routes/photos/getImage");
+
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -32,17 +33,17 @@ mongoose
   .connect(process.env.ATLAS_URI, {
     useNewUrlParser: true,
     useCreateIndex: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
   })
   .then(() => console.log("Connected to db"))
-  .catch(err => console.error("Cant connect" + err));
+  .catch((err) => console.error("Cant connect" + err));
 
 // Passport middleware
 app.use(passport.initialize());
 // Passport config
 require("./config/passport")(passport);
 
-app.use("/images", (req, res, next) => {
+app.use("/Images.files/", (req, res, next) => {
   eval(
     `Grid.prototype.findOne = ${Grid.prototype.findOne
       .toString()
@@ -52,11 +53,10 @@ app.use("/images", (req, res, next) => {
   next();
 });
 
-//Routes
 app.use("/users", users);
-app.use("/api/photos", postPhoto);
-app.use("/api/photos", getPhoto);
-
+app.use("/photos", photos);
+app.use("/photos", getphotos);
+app.use("/Images.files/", image);
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
 });
