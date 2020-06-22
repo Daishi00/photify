@@ -2,7 +2,10 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const Grid = require("gridfs-stream");
+const passport = require("passport");
 
+
+const users = require("./routes/users");
 const postPhoto = require("./routes/photos/postPhoto");
 const getPhoto = require("./routes/photos/getPhoto");
 const app = express();
@@ -34,7 +37,10 @@ mongoose
   .then(() => console.log("Connected to db"))
   .catch(err => console.error("Cant connect" + err));
 
-const tablesRouter = require("./routes/users");
+// Passport middleware
+app.use(passport.initialize());
+// Passport config
+require("./config/passport")(passport);
 
 app.use("/images", (req, res, next) => {
   eval(
@@ -46,7 +52,8 @@ app.use("/images", (req, res, next) => {
   next();
 });
 
-app.use("/users", tablesRouter);
+//Routes
+app.use("/users", users);
 app.use("/api/photos", postPhoto);
 app.use("/api/photos", getPhoto);
 
