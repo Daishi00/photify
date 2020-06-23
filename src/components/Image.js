@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./image.module.scss";
 import Download from "@material-ui/icons/SystemUpdateAlt";
 
-const Image = props => {
+const Image = (props) => {
   const [hover, setHover] = useState(false);
 
   const handleEnter = () => {
@@ -25,7 +25,7 @@ const Image = props => {
           <p className={styles.user}>{props.user}</p>
           <p className={styles.description}>{props.description}</p>
           <button className={styles.downloadButton}>
-            <Download />
+            <Download className={styles.downloadIcon} />
           </button>
         </div>
       )}
