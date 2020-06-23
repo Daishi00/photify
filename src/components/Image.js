@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import styles from "./image.module.scss";
+import Download from "@material-ui/icons/SystemUpdateAlt";
 
-const Image = (props) => {
+const Image = props => {
   const [hover, setHover] = useState(false);
 
   const handleEnter = () => {
@@ -13,22 +14,26 @@ const Image = (props) => {
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.imageContainer}>
-        {hover === true && (
-          <div className={styles.imageInfo}>
-            <p>By: {props.user}</p>
-          </div>
-        )}
-        <div className={styles.image}>
-          <img
-            src={`http://localhost:5000${props.imgURL}`}
-            key={props.user}
-            onMouseEnter={() => handleEnter()}
-            onMouseLeave={() => handleLeave()}
-          ></img>
+    <div
+      className={styles.imageContainer}
+      onMouseEnter={() => handleEnter()}
+      onMouseLeave={() => handleLeave()}
+    >
+      {hover === true && (
+        <div className={styles.imageInfo}>
+          <div className={styles.opacity} />
+          <p className={styles.user}>{props.user}</p>
+          <p className={styles.description}>{props.description}</p>
+          <button className={styles.downloadButton}>
+            <Download />
+          </button>
         </div>
-      </div>
+      )}
+      <img
+        src={`http://localhost:5000${props.imgURL}`}
+        key={props.user}
+        styles={{ opacity: 0 }}
+      ></img>
     </div>
   );
 };

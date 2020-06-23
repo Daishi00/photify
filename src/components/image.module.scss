@@ -1,23 +1,58 @@
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 .imageContainer {
   max-width: 300px;
-  max-height: 400px;
-  display: grid;
-}
-img {
-  max-width: 300px;
-  height: 350px;
-  max-height: 350px;
+  height: auto;
   position: relative;
-  z-index: 1;
 }
 
 .imageInfo {
+  width: 300px;
+  height: 200px;
   position: absolute;
-  z-index: 2;
+}
 
-  p {
-    margin: 0;
-    padding: 0;
-    font-size: 24px;
-  }
+.opacity {
+  width: 300px;
+  height: 200px;
+  position: absolute;
+  background-color: black;
+  opacity: 0.6;
+}
+
+.user {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  margin: 0;
+  color: #ffffff;
+  font-family: "Raleway", sans-serif;
+  font-weight: 700;
+}
+
+.description {
+  position: absolute;
+  left: 10px;
+  bottom: 15px;
+  margin: 0;
+  color: #ffffff;
+  font-family: "Raleway", sans-serif;
+  font-weight: 500;
+}
+
+.downloadButton {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  background: #2fb964;
+  border-radius: 5px;
+  border: none;
+  bottom: 15px;
+  right: 10px;
 }
