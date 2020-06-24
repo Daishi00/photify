@@ -2,23 +2,22 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./gallery.module.scss";
 import Image from "./Image";
-import GridList from "@material-ui/core/GridList";
 const Gallery = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
     axios({
       method: "GET",
-      url: `/photos`
+      url: `/photos`,
     })
-      .then(async res => {
+      .then(async (res) => {
         await setData(res.data);
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   }, []);
 
   return (
     <div className={styles.container}>
-      {data.map(item => (
+      {data.map((item) => (
         <Image
           imgURL={item.imgURL}
           user={item.user}

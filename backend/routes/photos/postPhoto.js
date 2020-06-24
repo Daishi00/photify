@@ -36,7 +36,7 @@ router.post(
   async (req, res) => {
     const photo = new photoModel({
       user: req.body.user,
-      image: req.files["image"][0].id,
+      image: req.files["image"] ? req.files["image"][0].id : null,
       description: req.body.description,
       tags: req.body.tags,
     });
