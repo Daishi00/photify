@@ -5,6 +5,7 @@ import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
 import AddIcon from "@material-ui/icons/Add";
 import { Button, Modal } from "semantic-ui-react";
 import AddImage from "./AddImage";
+import Login from "./Login";
 const Header = () => {
   return (
     <div>
@@ -14,10 +15,7 @@ const Header = () => {
         </div>
         <div className={styles.buttonContainer}>
           <AddImage />
-          <button className={styles.button}>
-            <PersonIcon className={styles.icon} />
-            Login
-          </button>
+          <Login />
           <button className={styles.button}>
             <AddIcon className={styles.icon} />
             Sign up
