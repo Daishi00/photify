@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Button, Form, Input, Modal, Icon } from "semantic-ui-react";
-import styles from "./header.module.scss";
+import styles from "../Header/header.module.scss";
 
 import axios from "axios";
 
-class AddImage extends Component {
+class AddPhoto extends Component {
   constructor() {
     super();
     this.state = {
@@ -81,7 +81,6 @@ class AddImage extends Component {
         open={this.state.modalOpen}
         onClose={this.handleClose}
       >
-        {/* <Header icon="book" content="Adding new book" /> */}
         <Modal.Content>
           <Form onSubmit={this.handleSubmit} style={{ padding: "5px" }}>
             <Form.Field>
@@ -149,7 +148,6 @@ class AddImage extends Component {
                 onClick={this.handleClose}
                 style={{ marginLeft: "0px" }}
               >
-                <Icon name="external alternate" />
                 Leave
               </Button>
               <Button
@@ -157,7 +155,6 @@ class AddImage extends Component {
                 type="submit"
                 floated="right"
               >
-                <Icon name="plus" />
                 Upload
               </Button>
               {this.state.endmessage === "Success!" ? (
@@ -189,4 +186,4 @@ class AddImage extends Component {
   }
 }
 
-export default AddImage;
+export default AddPhoto;

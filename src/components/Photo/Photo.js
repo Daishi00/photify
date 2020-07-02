@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import styles from "./image.module.scss";
+import styles from "./photo.module.scss";
 import Download from "@material-ui/icons/SystemUpdateAlt";
 import fileDownload from "js-file-download";
 import axios from "axios";
 
-const Image = (props) => {
+const Photo = (props) => {
   const [hover, setHover] = useState(false);
 
   const handleEnter = () => {
@@ -22,7 +22,7 @@ const Image = (props) => {
       responseType: "arraybuffer",
     })
       .then((response) => {
-        fileDownload(response.data, `${props.user}.jpg`);
+        fileDownload(response.data, `${props.description}.jpg`);
       })
       .catch((err) => {
         console.log(props.imgURL);
@@ -63,4 +63,4 @@ const Image = (props) => {
   );
 };
 
-export default Image;
+export default Photo;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./gallery.module.scss";
-import Image from "./Image";
+import Photo from "../Photo/Photo";
 const Gallery = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -18,7 +18,7 @@ const Gallery = () => {
   return (
     <div className={styles.container}>
       {data.map((item) => (
-        <Image
+        <Photo
           imgURL={item.imgURL}
           user={item.user}
           description={item.description}

@@ -1,11 +1,10 @@
 import React from "react";
 import styles from "./header.module.scss";
 import PersonIcon from "@material-ui/icons/Person";
-import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
 import AddIcon from "@material-ui/icons/Add";
 import { Button, Modal } from "semantic-ui-react";
-import AddImage from "./AddImage";
 import Login from "./Login";
+import AddPhoto from "../AddPhoto/AddPhoto";
 const Header = () => {
   return (
     <div>
@@ -14,7 +13,7 @@ const Header = () => {
           <h1>photify</h1>
         </div>
         <div className={styles.buttonContainer}>
-          <AddImage />
+          <AddPhoto />
           <Login />
           <button className={styles.button}>
             <AddIcon className={styles.icon} />
