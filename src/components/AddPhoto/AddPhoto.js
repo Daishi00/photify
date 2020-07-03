@@ -15,7 +15,7 @@ class AddPhoto extends Component {
       modalOpen: false,
       request: "",
       endmessage: "",
-      borderColor: ""
+      borderColor: "",
     };
   }
   handleOpen = () => this.setState({ modalOpen: true });
@@ -26,41 +26,42 @@ class AddPhoto extends Component {
     this.setState({ [name]: value });
   };
 
-  handleUpload = e => {
+  handleUpload = (e) => {
     const { name, files } = e.target;
     console.log(files);
     this.setState({
-      [name]: files[0]
+      [name]: files[0],
     });
   };
 
-  handleSubmit = async e => {
+  handleSubmit = async (e) => {
     e.preventDefault();
-    const { user, description, image, tags } = this.state;
+    const { description, image, tags } = this.state;
+    const user = localStorage.getItem("name");
     const imageFormData = new FormData();
     imageFormData.set("user", user);
     imageFormData.set("description", description);
     imageFormData.set("image", image);
     imageFormData.set("tags", tags);
     const headers = {
-      "Content-Type": "multipart/form-data"
+      "Content-Type": "multipart/form-data",
     };
     axios({
       method: "post",
       url: "/photos/",
       data: imageFormData,
-      headers: headers
+      headers: headers,
     })
-      .then(res => {
+      .then((res) => {
         console.log(res.data);
         this.setState({
-          endmessage: "Success!"
+          endmessage: "Success!",
         });
         console.log(this.state.request);
       })
-      .catch(err => {
+      .catch((err) => {
         this.setState({
-          endmessage: err.response.data.message
+          endmessage: err.response.data.message,
         });
       });
   };
@@ -70,10 +71,12 @@ class AddPhoto extends Component {
       <Modal
         className={`entrance-center ${styles.slide}`}
         size={"mini"}
+        dimmer={"blurring"}
         trigger={
           <button
             className={`${styles.button} ${styles.buttonUpload}`}
             onClick={this.handleOpen}
+            show="blurring"
           >
             <i className="cloud upload icon"></i>Upload
           </button>
@@ -83,22 +86,6 @@ class AddPhoto extends Component {
       >
         <Modal.Content>
           <Form onSubmit={this.handleSubmit} style={{ padding: "5px" }}>
-            <Form.Field>
-              <div className="ui labeled input">
-                <label
-                  className="ui right pointing label"
-                  style={{ width: "40px" }}
-                >
-                  <i className="user icon"></i>
-                </label>
-                <Input
-                  placeholder="user"
-                  name="user"
-                  value={this.state.user}
-                  onChange={this.handleChange}
-                />
-              </div>
-            </Form.Field>
             <Form.Field>
               <div className="ui labeled input">
                 <label
@@ -162,7 +149,7 @@ class AddPhoto extends Component {
                   style={{
                     color: "green",
                     display: "flex",
-                    justifyContent: "center"
+                    justifyContent: "center",
                   }}
                 >
                   {this.state.endmessage}
@@ -172,7 +159,7 @@ class AddPhoto extends Component {
                   style={{
                     color: "red",
                     display: "flex",
-                    justifyContent: "center"
+                    justifyContent: "center",
                   }}
                 >
                   {this.state.endmessage}

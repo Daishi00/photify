@@ -10,15 +10,15 @@ class Signup extends Component {
     email: "",
     password: "",
     passwordconf: "",
-    message: ""
+    message: "",
   };
 
-  onFormChange = e => {
+  onFormChange = (e) => {
     const { name, value } = e.target;
     this.setState({ [name]: value });
   };
 
-  onFormSubmit = async e => {
+  onFormSubmit = async (e) => {
     e.preventDefault();
     console.log("xD");
     const { name, email, password, passwordconf } = this.state;
@@ -29,12 +29,12 @@ class Signup extends Component {
       .post("/users/", {
         name: name,
         email: email,
-        password: password
+        password: password,
       })
-      .then(response => {
+      .then((response) => {
         this.setState({ message: "Success now u can log in!" });
       })
-      .catch(error => {
+      .catch((error) => {
         this.setState({ message: error.response.data });
         console.log(`login error ${error.response.data}`);
       });
@@ -49,6 +49,7 @@ class Signup extends Component {
       <Modal
         className={`entrance-center ${styles.slide}`}
         size={"mini"}
+        dimmer={"blurring"}
         trigger={
           <button className={`${styles.button}`} onClick={this.handleOpen}>
             <Icon name="plus" />
@@ -148,7 +149,7 @@ class Signup extends Component {
                 style={{
                   color: "green",
                   display: "flex",
-                  justifyContent: "center"
+                  justifyContent: "center",
                 }}
               >
                 {this.state.message}
@@ -158,7 +159,7 @@ class Signup extends Component {
                 style={{
                   color: "red",
                   display: "flex",
-                  justifyContent: "center"
+                  justifyContent: "center",
                 }}
               >
                 {this.state.message}

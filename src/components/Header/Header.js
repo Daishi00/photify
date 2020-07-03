@@ -5,7 +5,7 @@ import Login from "../Login/Login";
 import AddPhoto from "../AddPhoto/AddPhoto";
 import Signup from "../Signup/Signup";
 import getToken from "../utils/getToken";
-
+import Profile from "../Profile/Profile";
 const Header = () => {
   const removeToken = () => {
     localStorage.clear();
@@ -18,6 +18,7 @@ const Header = () => {
           <h1>photify</h1>
         </div>
         <div className={styles.buttonContainer}>
+          {getToken() !== "" && <Profile />}
           {getToken() !== "" && <AddPhoto />}
           {getToken() === "" && <Login />}
           {getToken() === "" && <Signup />}

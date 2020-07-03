@@ -6,13 +6,13 @@ import axios from "axios";
 
 class Login extends Component {
   state = {
-    email: "",
+    name: "",
     password: "",
-    message: ""
+    message: "",
   };
 
   // pobranie i ustawienie wartości input
-  onFormChange = e => {
+  onFormChange = (e) => {
     const { name, value } = e.target;
     this.setState(() => {
       return { [name]: value };
@@ -20,31 +20,31 @@ class Login extends Component {
   };
 
   refresh = () => {
-    setTimeout(function() {
+    setTimeout(function () {
       window.location.reload();
     }, 100);
   };
 
   //  pobranie danych z formularza
-  onFormSubmit = async e => {
+  onFormSubmit = async (e) => {
     e.preventDefault();
-    const { email, password } = this.state;
+    const { name, password } = this.state;
 
-    localStorage.setItem("email", email);
+    localStorage.setItem("name", name);
 
     axios
       .post("/auth", {
-        email: email,
-        password: password
+        name: name,
+        password: password,
       })
-      .then(response => {
+      .then((response) => {
         // zapisywanie statusu, jako token do localStorage
         localStorage.setItem("status", response.data);
 
         this.setState({ message: "Success!" });
         this.refresh();
       })
-      .catch(error => {
+      .catch((error) => {
         this.setState({ message: error.response.data });
         console.log(`login error ${error.response.data}`);
       });
@@ -59,6 +59,7 @@ class Login extends Component {
       <Modal
         className={`entrance-center ${styles.slide}`}
         size={"mini"}
+        dimmer={"blurring"}
         trigger={
           <button className={`${styles.button}`} onClick={this.handleOpen}>
             <Icon name="user" />
@@ -79,9 +80,9 @@ class Login extends Component {
                   <i className="user icon"></i>
                 </label>
                 <Input
-                  placeholder="email"
-                  name="email"
-                  value={this.state.email}
+                  placeholder="name"
+                  name="name"
+                  value={this.state.name}
                   onChange={this.onFormChange}
                 />
               </div>
@@ -126,7 +127,7 @@ class Login extends Component {
                   style={{
                     color: "green",
                     display: "flex",
-                    justifyContent: "center"
+                    justifyContent: "center",
                   }}
                 >
                   {this.state.message}
@@ -136,7 +137,7 @@ class Login extends Component {
                   style={{
                     color: "red",
                     display: "flex",
-                    justifyContent: "center"
+                    justifyContent: "center",
                   }}
                 >
                   {this.state.message}

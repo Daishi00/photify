@@ -9,7 +9,6 @@ const App = () => {
     <div className={style.container}>
       <Header />
       <SearchBar />
-      <Gallery />
       <Footer />
     </div>
   );
