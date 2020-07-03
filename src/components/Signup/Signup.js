@@ -10,7 +10,7 @@ class Signup extends Component {
     email: "",
     password: "",
     passwordconf: "",
-    errorMessage: ""
+    message: ""
   };
 
   onFormChange = e => {
@@ -23,7 +23,7 @@ class Signup extends Component {
     console.log("xD");
     const { name, email, password, passwordconf } = this.state;
     if (password !== passwordconf)
-      return this.setState({ errorMessage: "confirm password" });
+      return this.setState({ message: "confirm password" });
 
     axios
       .post("/users/", {
@@ -33,9 +33,10 @@ class Signup extends Component {
       })
       .then(response => {
         localStorage.setItem("status", response.headers["x-auth-token"]);
+        this.setState({ message: "Success!" });
       })
       .catch(error => {
-        this.setState({ errorMessage: error.response.data });
+        this.setState({ message: error.response.data });
         console.log(`login error ${error.response.data}`);
       });
   };
@@ -146,6 +147,27 @@ class Signup extends Component {
                 <Icon name="plus" />
                 Sign up
               </Button>
+              {this.state.message === "Success!" ? (
+                <h5
+                  style={{
+                    color: "green",
+                    display: "flex",
+                    justifyContent: "center"
+                  }}
+                >
+                  {this.state.message}
+                </h5>
+              ) : (
+                <h5
+                  style={{
+                    color: "red",
+                    display: "flex",
+                    justifyContent: "center"
+                  }}
+                >
+                  {this.state.message}
+                </h5>
+              )}
             </Modal.Actions>
           </Form>
         </Modal.Content>

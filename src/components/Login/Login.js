@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Button, Form, Input, Modal, Icon } from "semantic-ui-react";
-import styles from "./Header/header.module.scss";
+import styles from "../Header/header.module.scss";
 
 import axios from "axios";
 
@@ -8,7 +8,7 @@ class Login extends Component {
   state = {
     email: "",
     password: "",
-    errorMessage: ""
+    message: ""
   };
 
   // pobranie i ustawienie wartości input
@@ -36,9 +36,10 @@ class Login extends Component {
 
         // zapisywanie statusu, jako token do localStorage
         localStorage.setItem("status", response.data);
+        this.setState({ message: "Success!" });
       })
       .catch(error => {
-        this.setState({ errorMessage: error.response.data });
+        this.setState({ message: error.response.data });
         console.log(`login error ${error.response.data}`);
       });
   };
@@ -95,6 +96,7 @@ class Login extends Component {
                   name="password"
                   value={this.state.password}
                   onChange={this.onFormChange}
+                  type="password"
                 />
               </div>
             </Form.Field>
@@ -116,6 +118,27 @@ class Login extends Component {
                 <Icon name="plus" />
                 Login
               </Button>
+              {this.state.message === "Success!" ? (
+                <h5
+                  style={{
+                    color: "green",
+                    display: "flex",
+                    justifyContent: "center"
+                  }}
+                >
+                  {this.state.message}
+                </h5>
+              ) : (
+                <h5
+                  style={{
+                    color: "red",
+                    display: "flex",
+                    justifyContent: "center"
+                  }}
+                >
+                  {this.state.message}
+                </h5>
+              )}
             </Modal.Actions>
           </Form>
         </Modal.Content>
