@@ -75,7 +75,7 @@ class AddPhoto extends Component {
             className={`${styles.button} ${styles.buttonUpload}`}
             onClick={this.handleOpen}
           >
-            Upload
+            <i className="cloud upload icon"></i>Upload
           </button>
         }
         open={this.state.modalOpen}
