@@ -57,6 +57,14 @@ header {
         background-color: #036645 !important;
       }
     }
+
+    .buttonLogin {
+      background-color: #000000 !important;
+
+      &:hover {
+        background-color: #fff!important;
+      }
+    }
     .icon {
       width: 20%;
       height: 50%;
