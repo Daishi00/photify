@@ -1,41 +1,38 @@
 import React, { Component } from "react";
 import { Button, Form, Input, Modal, Icon } from "semantic-ui-react";
-import styles from "./Header/header.module.scss";
+import styles from "../Header/header.module.scss";
 
 import axios from "axios";
 
-class Login extends Component {
+class Signup extends Component {
   state = {
+    name: "",
     email: "",
     password: "",
+    passwordconf: "",
     errorMessage: ""
   };
 
-  // pobranie i ustawienie wartości input
   onFormChange = e => {
     const { name, value } = e.target;
-    this.setState(() => {
-      return { [name]: value };
-    });
+    this.setState({ [name]: value });
   };
 
-  //  pobranie danych z formularza
   onFormSubmit = async e => {
     e.preventDefault();
-    const { email, password } = this.state;
-
-    localStorage.setItem("email", email);
+    console.log("xD");
+    const { name, email, password, passwordconf } = this.state;
+    if (password !== passwordconf)
+      return this.setState({ errorMessage: "confirm password" });
 
     axios
-      .post("/auth", {
+      .post("/users/", {
+        name: name,
         email: email,
         password: password
       })
       .then(response => {
-        console.log("response: ", response);
-
-        // zapisywanie statusu, jako token do localStorage
-        localStorage.setItem("status", response.data);
+        localStorage.setItem("status", response.headers["x-auth-token"]);
       })
       .catch(error => {
         this.setState({ errorMessage: error.response.data });
@@ -57,8 +54,8 @@ class Login extends Component {
             className={`${styles.button} ${styles.buttonLogin}`}
             onClick={this.handleOpen}
           >
-            <Icon name="user" />
-            Login
+            <Icon name="plus" />
+            Sign up
           </button>
         }
         open={this.state.modalOpen}
@@ -73,6 +70,22 @@ class Login extends Component {
                   style={{ width: "40px" }}
                 >
                   <i className="user icon"></i>
+                </label>
+                <Input
+                  placeholder="name"
+                  name="name"
+                  value={this.state.name}
+                  onChange={this.onFormChange}
+                />
+              </div>
+            </Form.Field>
+            <Form.Field>
+              <div className="ui labeled input">
+                <label
+                  className="ui right pointing label"
+                  style={{ width: "40px" }}
+                >
+                  <i className="at icon"></i>
                 </label>
                 <Input
                   placeholder="email"
@@ -95,10 +108,27 @@ class Login extends Component {
                   name="password"
                   value={this.state.password}
                   onChange={this.onFormChange}
+                  type="password"
                 />
               </div>
             </Form.Field>
-
+            <Form.Field>
+              <div className="ui labeled input">
+                <label
+                  className="ui right pointing label"
+                  style={{ width: "40px" }}
+                >
+                  <i className="lock icon"></i>
+                </label>
+                <Input
+                  placeholder="confirm password"
+                  name="passwordconf"
+                  value={this.state.passwordconf}
+                  onChange={this.onFormChange}
+                  type="password"
+                />
+              </div>
+            </Form.Field>
             <Modal.Actions>
               <Button
                 className="red ui button"
@@ -114,7 +144,7 @@ class Login extends Component {
                 floated="right"
               >
                 <Icon name="plus" />
-                Login
+                Sign up
               </Button>
             </Modal.Actions>
           </Form>
@@ -124,4 +154,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default Signup;
