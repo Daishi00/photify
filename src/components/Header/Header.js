@@ -17,8 +17,8 @@ const Header = () => {
         </div>
         <div className={styles.buttonContainer}>
           {getToken() !== "" && <AddPhoto />}
-          <Login />
-          <Signup />
+          {getToken() === "" && <Login />}
+          {getToken() === "" && <Signup />}
         </div>
       </header>
     </div>
