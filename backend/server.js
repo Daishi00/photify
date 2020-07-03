@@ -2,15 +2,22 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const Grid = require("gridfs-stream");
-const passport = require("passport");
+const config = require("config");
 
+const authMiddleware = require("./middleware/auth");
 const users = require("./routes/users");
 const photos = require("./routes/photos/postPhoto");
 const getphotos = require("./routes/photos/getPhoto");
 const image = require("./routes/photos/getImage");
+const auth = require("./routes/auth");
 
 const app = express();
 const port = process.env.PORT || 5000;
+
+if (!config.get("jwtPrivateKey")) {
+  console.error("FATAL ERROR: jwtPrivateKey is not defined.");
+  process.exit(1);
+}
 
 app.use(cors());
 app.use(express.json());
@@ -33,15 +40,10 @@ mongoose
   .connect(process.env.ATLAS_URI, {
     useNewUrlParser: true,
     useCreateIndex: true,
-    useUnifiedTopology: true,
+    useUnifiedTopology: true
   })
   .then(() => console.log("Connected to db"))
-  .catch((err) => console.error("Cant connect" + err));
-
-// Passport middleware
-app.use(passport.initialize());
-// Passport config
-require("./config/passport")(passport);
+  .catch(err => console.error("Cant connect" + err));
 
 app.use("/Images.files/", (req, res, next) => {
   eval(
@@ -53,6 +55,7 @@ app.use("/Images.files/", (req, res, next) => {
   next();
 });
 
+app.use("/auth", auth);
 app.use("/users", users);
 app.use("/photos", photos);
 app.use("/photos", getphotos);
