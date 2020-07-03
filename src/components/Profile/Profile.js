@@ -4,7 +4,10 @@ import styles from "../Header/header.module.scss";
 import Avatar from "react-avatar";
 const Profile = () => {
   return (
-    <Modal trigger={<button className={styles.button}>Profile</button>}>
+    <Modal
+      dimmer={"blurring"}
+      trigger={<button className={styles.button}>Profile</button>}
+    >
       <Modal.Header>Hello back, {localStorage.getItem("name")}!</Modal.Header>
       <Modal.Content image>
         <Avatar
