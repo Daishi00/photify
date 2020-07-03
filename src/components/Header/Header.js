@@ -9,6 +9,10 @@ import Signup from "../Signup/Signup";
 import getToken from "../utils/getToken";
 
 const Header = () => {
+  const removeToken = () => {
+    localStorage.clear();
+    window.location.reload();
+  };
   return (
     <div>
       <header>
@@ -19,6 +23,11 @@ const Header = () => {
           {getToken() !== "" && <AddPhoto />}
           {getToken() === "" && <Login />}
           {getToken() === "" && <Signup />}
+          {getToken() !== "" && (
+            <button className={styles.button} onClick={() => removeToken()}>
+              Log out
+            </button>
+          )}
         </div>
       </header>
     </div>
