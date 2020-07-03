@@ -7,17 +7,17 @@ const Gallery = () => {
   useEffect(() => {
     axios({
       method: "GET",
-      url: `/photos`,
+      url: `/photos`
     })
-      .then(async (res) => {
-        await setData(res.data);
+      .then(async res => {
+        await setData(res.data.reverse());
       })
-      .catch((err) => console.log(err));
+      .catch(err => console.log(err));
   }, []);
 
   return (
     <div className={styles.container}>
-      {data.map((item) => (
+      {data.map(item => (
         <Photo
           imgURL={item.imgURL}
           user={item.user}

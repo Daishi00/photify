@@ -126,45 +126,44 @@ class Signup extends Component {
                 />
               </div>
             </Form.Field>
-            <Modal.Actions>
-              <Button
-                className="red ui button"
-                onClick={this.handleClose}
-                style={{ marginLeft: "0px" }}
+            <Modal.Actions></Modal.Actions>
+            <Button
+              className="red ui button"
+              onClick={this.handleClose}
+              style={{ marginLeft: "0px" }}
+            >
+              <Icon name="external alternate" />
+              Leave
+            </Button>
+            <Button
+              className={`ui button ${styles.buttonColor}`}
+              type="submit"
+              floated="right"
+            >
+              <Icon name="plus" />
+              Sign up
+            </Button>
+            {this.state.message === "Success now u can log in!" ? (
+              <h5
+                style={{
+                  color: "green",
+                  display: "flex",
+                  justifyContent: "center"
+                }}
               >
-                <Icon name="external alternate" />
-                Leave
-              </Button>
-              <Button
-                className={`ui button ${styles.buttonColor}`}
-                type="submit"
-                floated="right"
+                {this.state.message}
+              </h5>
+            ) : (
+              <h5
+                style={{
+                  color: "red",
+                  display: "flex",
+                  justifyContent: "center"
+                }}
               >
-                <Icon name="plus" />
-                Sign up
-              </Button>
-              {this.state.message === "Success now u can log in!" ? (
-                <h5
-                  style={{
-                    color: "green",
-                    display: "flex",
-                    justifyContent: "center"
-                  }}
-                >
-                  {this.state.message}
-                </h5>
-              ) : (
-                <h5
-                  style={{
-                    color: "red",
-                    display: "flex",
-                    justifyContent: "center"
-                  }}
-                >
-                  {this.state.message}
-                </h5>
-              )}
-            </Modal.Actions>
+                {this.state.message}
+              </h5>
+            )}
           </Form>
         </Modal.Content>
       </Modal>
