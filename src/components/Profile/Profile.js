@@ -1,12 +1,18 @@
 import React, { Component } from "react";
-import { Button, Header, Image, Modal } from "semantic-ui-react";
+import { Button, Header, Image, Modal, Icon } from "semantic-ui-react";
 import styles from "../Header/header.module.scss";
 import Avatar from "react-avatar";
 const Profile = () => {
   return (
     <Modal
       dimmer={"blurring"}
-      trigger={<button className={styles.button}>Profile</button>}
+      trigger={
+        <button className={styles.button}>
+          {" "}
+          <Icon name="user" />
+          Profile
+        </button>
+      }
     >
       <Modal.Header>Hello back, {localStorage.getItem("name")}!</Modal.Header>
       <Modal.Content image>
