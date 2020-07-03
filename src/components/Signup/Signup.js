@@ -32,7 +32,6 @@ class Signup extends Component {
         password: password
       })
       .then(response => {
-        localStorage.setItem("status", response.headers["x-auth-token"]);
         this.setState({ message: "Success now u can log in!" });
       })
       .catch(error => {
@@ -144,7 +143,7 @@ class Signup extends Component {
                 <Icon name="plus" />
                 Sign up
               </Button>
-              {this.state.message === "Success!" ? (
+              {this.state.message === "Success now u can log in!" ? (
                 <h5
                   style={{
                     color: "green",
