@@ -19,6 +19,12 @@ class Login extends Component {
     });
   };
 
+  refresh = () => {
+    setTimeout(function() {
+      window.location.reload();
+    }, 100);
+  };
+
   //  pobranie danych z formularza
   onFormSubmit = async e => {
     e.preventDefault();
@@ -37,6 +43,7 @@ class Login extends Component {
         // zapisywanie statusu, jako token do localStorage
         localStorage.setItem("status", response.data);
         this.setState({ message: "Success!" });
+        this.refresh();
       })
       .catch(error => {
         this.setState({ message: error.response.data });
@@ -51,15 +58,12 @@ class Login extends Component {
   render() {
     return (
       <Modal
-        className="entrance-center"
+        className={`entrance-center ${styles.slide}`}
         size={"mini"}
         trigger={
-          <button
-            className={`${styles.button} ${styles.buttonLogin}`}
-            onClick={this.handleOpen}
-          >
+          <button className={`${styles.button}`} onClick={this.handleOpen}>
             <Icon name="user" />
-            Login
+            Log in
           </button>
         }
         open={this.state.modalOpen}

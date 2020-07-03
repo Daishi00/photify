@@ -33,7 +33,7 @@ class Signup extends Component {
       })
       .then(response => {
         localStorage.setItem("status", response.headers["x-auth-token"]);
-        this.setState({ message: "Success!" });
+        this.setState({ message: "Success now u can log in!" });
       })
       .catch(error => {
         this.setState({ message: error.response.data });
@@ -48,13 +48,10 @@ class Signup extends Component {
   render() {
     return (
       <Modal
-        className="entrance-center"
+        className={`entrance-center ${styles.slide}`}
         size={"mini"}
         trigger={
-          <button
-            className={`${styles.button} ${styles.buttonLogin}`}
-            onClick={this.handleOpen}
-          >
+          <button className={`${styles.button}`} onClick={this.handleOpen}>
             <Icon name="plus" />
             Sign up
           </button>

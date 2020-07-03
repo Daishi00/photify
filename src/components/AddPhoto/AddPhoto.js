@@ -15,7 +15,7 @@ class AddPhoto extends Component {
       modalOpen: false,
       request: "",
       endmessage: "",
-      borderColor: "",
+      borderColor: ""
     };
   }
   handleOpen = () => this.setState({ modalOpen: true });
@@ -26,15 +26,15 @@ class AddPhoto extends Component {
     this.setState({ [name]: value });
   };
 
-  handleUpload = (e) => {
+  handleUpload = e => {
     const { name, files } = e.target;
     console.log(files);
     this.setState({
-      [name]: files[0],
+      [name]: files[0]
     });
   };
 
-  handleSubmit = async (e) => {
+  handleSubmit = async e => {
     e.preventDefault();
     const { user, description, image, tags } = this.state;
     const imageFormData = new FormData();
@@ -43,24 +43,24 @@ class AddPhoto extends Component {
     imageFormData.set("image", image);
     imageFormData.set("tags", tags);
     const headers = {
-      "Content-Type": "multipart/form-data",
+      "Content-Type": "multipart/form-data"
     };
     axios({
       method: "post",
       url: "/photos/",
       data: imageFormData,
-      headers: headers,
+      headers: headers
     })
-      .then((res) => {
+      .then(res => {
         console.log(res.data);
         this.setState({
-          endmessage: "Success!",
+          endmessage: "Success!"
         });
         console.log(this.state.request);
       })
-      .catch((err) => {
+      .catch(err => {
         this.setState({
-          endmessage: err.response.data.message,
+          endmessage: err.response.data.message
         });
       });
   };
@@ -68,7 +68,7 @@ class AddPhoto extends Component {
   render() {
     return (
       <Modal
-        className="entrance-center"
+        className={`entrance-center ${styles.slide}`}
         size={"mini"}
         trigger={
           <button
@@ -162,7 +162,7 @@ class AddPhoto extends Component {
                   style={{
                     color: "green",
                     display: "flex",
-                    justifyContent: "center",
+                    justifyContent: "center"
                   }}
                 >
                   {this.state.endmessage}
@@ -172,7 +172,7 @@ class AddPhoto extends Component {
                   style={{
                     color: "red",
                     display: "flex",
-                    justifyContent: "center",
+                    justifyContent: "center"
                   }}
                 >
                   {this.state.endmessage}

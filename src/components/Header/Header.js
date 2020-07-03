@@ -6,6 +6,8 @@ import { Button, Modal } from "semantic-ui-react";
 import Login from "../Login/Login";
 import AddPhoto from "../AddPhoto/AddPhoto";
 import Signup from "../Signup/Signup";
+import getToken from "../utils/getToken";
+
 const Header = () => {
   return (
     <div>
@@ -14,7 +16,7 @@ const Header = () => {
           <h1>photify</h1>
         </div>
         <div className={styles.buttonContainer}>
-          <AddPhoto />
+          {getToken() !== "" && <AddPhoto />}
           <Login />
           <Signup />
         </div>
