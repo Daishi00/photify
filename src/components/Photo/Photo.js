@@ -8,6 +8,7 @@ import { Button, Form, Input, Modal, Icon, Header } from "semantic-ui-react";
 const Photo = props => {
   const [hover, setHover] = useState(false);
   const [like, setLike] = useState(false);
+  const [modal, setModal] = useState(false);
 
   const handleEnter = () => {
     setHover(true);
@@ -45,48 +46,75 @@ const Photo = props => {
     }
   };
 
-  const openImage = () => {
-    window.open(`http://localhost:5000${props.imgURL} `);
+  const openModal = () => {
+    // window.open(`http://localhost:5000${props.imgURL} `);
+    setModal(true);
   };
 
   return (
-    <div
-      className={styles.imageContainer}
-      onMouseEnter={() => handleEnter()}
-      onMouseLeave={() => handleLeave()}
-    >
-      {hover === true && (
-        <div className={styles.imageInfo}>
-          <div className={styles.opacity} onClick={() => openImage()} />
-          <p className={styles.user}>{props.user}</p>
-          <p className={styles.description}>{props.description}</p>
-          <button
-            className={styles.downloadButton}
-            onClick={() => handleDownload()}
-          >
-            <Download className={styles.downloadIcon} />
-          </button>
+    <>
+      <div
+        className={styles.imageContainer}
+        onMouseEnter={() => handleEnter()}
+        onMouseLeave={() => handleLeave()}
+      >
+        {hover === true && (
+          <div className={styles.imageInfo}>
+            <div className={styles.opacity} onClick={() => openModal()} />
+            <p className={styles.user}>{props.user}</p>
+            <p className={styles.description}>{props.description}</p>
+            <button
+              className={styles.downloadButton}
+              onClick={() => handleDownload()}
+            >
+              <Download className={styles.downloadIcon} />
+            </button>
 
-          <button
-            className={`${styles.likeButton} ${like === true &&
-              styles.likeTrue}`}
-            onClick={() => handleLike()}
-          >
-            {like === false && (
-              <i className={`heart outline icon ${styles.heart}`} />
-            )}
-            {like === true && <i className={`heart icon ${styles.heart}`} />}
-            {like === false && props.likes}
-            {like === true && props.likes + 1}
-          </button>
-        </div>
-      )}
-      <img
-        src={`http://localhost:5000${props.imgURL}`}
-        key={props.user}
-        styles={{ opacity: 0 }}
-      ></img>
-    </div>
+            <button
+              className={`${styles.likeButton} ${like === true &&
+                styles.likeTrue}`}
+              onClick={() => handleLike()}
+            >
+              {like === false && (
+                <i className={`heart outline icon ${styles.heart}`} />
+              )}
+              {like === true && <i className={`heart icon ${styles.heart}`} />}
+              {like === false && props.likes}
+              {like === true && props.likes + 1}
+            </button>
+          </div>
+        )}
+        <img
+          src={`http://localhost:5000${props.imgURL}`}
+          key={props.user}
+          styles={{ opacity: 0 }}
+        ></img>
+
+        <Modal dimmer={"blurring"} open={modal}>
+          <Modal.Header>{props.description}</Modal.Header>
+          <Modal.Content image>
+            <img
+              src={`http://localhost:5000${props.imgURL}`}
+              key={props.user}
+              styles={{ opacity: 0 }}
+            ></img>
+            <Modal.Description style={{ marginLeft: "50px" }}>
+              <Header>Comments</Header>
+            </Modal.Description>
+          </Modal.Content>
+          <Modal.Actions>
+            <Button
+              className="red ui button"
+              onClick={() => setModal(false)}
+              style={{ marginLeft: "0px" }}
+            >
+              <Icon name="external alternate" />
+              Leave
+            </Button>
+          </Modal.Actions>
+        </Modal>
+      </div>
+    </>
   );
 };
 
