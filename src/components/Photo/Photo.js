@@ -3,6 +3,7 @@ import styles from "./photo.module.scss";
 import Download from "@material-ui/icons/SystemUpdateAlt";
 import fileDownload from "js-file-download";
 import axios from "axios";
+import { Button, Form, Input, Modal, Icon, Header } from "semantic-ui-react";
 
 const Photo = props => {
   const [hover, setHover] = useState(false);
@@ -44,6 +45,10 @@ const Photo = props => {
     }
   };
 
+  const openImage = () => {
+    window.open(`http://localhost:5000${props.imgURL} `);
+  };
+
   return (
     <div
       className={styles.imageContainer}
@@ -52,7 +57,7 @@ const Photo = props => {
     >
       {hover === true && (
         <div className={styles.imageInfo}>
-          <div className={styles.opacity} />
+          <div className={styles.opacity} onClick={() => openImage()} />
           <p className={styles.user}>{props.user}</p>
           <p className={styles.description}>{props.description}</p>
           <button

@@ -36,6 +36,10 @@
       background-color: black;
       animation: opacity 0.4s forwards;
 
+      &:hover {
+        cursor: zoom-in;
+      }
+
       @keyframes opacity {
         0% {
           opacity: 0.1;
@@ -85,6 +89,10 @@
       margin: 0;
       animation: fadein 0.4s forwards;
 
+      &:hover {
+        cursor: pointer;
+      }
+
       .downloadIcon {
         width: 20px;
         height: 20px;
@@ -98,7 +106,7 @@
       margin: 0;
       padding: 0;
       border: none;
-      background: #ffffff;
+      background: #2fb964;
       border-radius: 20px;
       display: flex;
       justify-content: center;
