@@ -21,7 +21,7 @@ const Photo = (props) => {
   const [like, setLike] = useState(false);
   const [modal, setModal] = useState(false);
   const [amount, setAmount] = useState(
-    props.likes + Math.floor(Math.random() * 10)
+    props.likes + Math.floor(Math.random() * 5)
   );
 
   const handleEnter = () => {
