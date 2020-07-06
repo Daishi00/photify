@@ -9,6 +9,7 @@ class Comment extends React.Component {
     this.state = {
       user: "",
       text: "",
+      photo: "",
       message: ""
     };
   }

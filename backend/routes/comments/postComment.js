@@ -5,7 +5,8 @@ const Comment = require("./../../models/Comment");
 router.post("/", async (req, res) => {
   const comment = new Comment({
     user: req.body.user,
-    text: req.body.text
+    text: req.body.text,
+    photo: req.body.photo
   });
   try {
     const newComment = await comment.save();
