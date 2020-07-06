@@ -111,7 +111,7 @@ const Photo = (props) => {
           styles={{ opacity: 0 }}
         ></img>
 
-        <Modal dimmer={"blurring"} open={modal}>
+        <Modal dimmer={"blurring"} className={styles.slidein} open={modal}>
           <Modal.Header>
             {props.description}{" "}
             <Button
