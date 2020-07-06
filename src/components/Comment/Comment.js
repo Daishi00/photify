@@ -70,7 +70,7 @@ class Comment extends React.Component {
               justifyContent: "center",
               alignItems: "center",
               color: "green",
-              fontSize: "12px",
+              fontSize: "16px",
             }}
           >
             {this.state.message}
