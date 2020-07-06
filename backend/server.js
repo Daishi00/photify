@@ -10,6 +10,9 @@ const photos = require("./routes/photos/postPhoto");
 const getphotos = require("./routes/photos/getPhoto");
 const image = require("./routes/photos/getImage");
 const auth = require("./routes/auth");
+const postComment = require("./routes/comments/postComment");
+const getComment = require("./routes/comments/getComment");
+
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -39,10 +42,10 @@ mongoose
   .connect(process.env.ATLAS_URI, {
     useNewUrlParser: true,
     useCreateIndex: true,
-    useUnifiedTopology: true,
+    useUnifiedTopology: true
   })
   .then(() => console.log("Connected to db"))
-  .catch((err) => console.error("Cant connect" + err));
+  .catch(err => console.error("Cant connect" + err));
 
 app.use("/Images.files/", (req, res, next) => {
   eval(
@@ -57,6 +60,9 @@ app.use("/Images.files/", (req, res, next) => {
 app.use("/auth", auth);
 app.use("/users", users);
 app.use("/photos", photos);
+app.use("/comment/", postComment);
+app.use("/comment/", getComment);
+
 app.use("/photos", getphotos);
 app.use("/Images.files/", image);
 app.listen(port, () => {

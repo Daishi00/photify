@@ -4,7 +4,7 @@ import Download from "@material-ui/icons/SystemUpdateAlt";
 import fileDownload from "js-file-download";
 import axios from "axios";
 import getToken from "../utils/getToken";
-
+import Comment from "../Comment/Comment";
 import { Button, Form, Input, Modal, Icon, Header } from "semantic-ui-react";
 
 const Photo = props => {
@@ -118,6 +118,7 @@ const Photo = props => {
             ></img>
             <Modal.Description style={{ marginLeft: "50px" }}>
               <Header>Comments</Header>
+              <Comment imgURL={props.imgURL} />
             </Modal.Description>
           </Modal.Content>
           <Modal.Actions>
