@@ -4,8 +4,9 @@ import Download from "@material-ui/icons/SystemUpdateAlt";
 import fileDownload from "js-file-download";
 import axios from "axios";
 
-const Photo = (props) => {
+const Photo = props => {
   const [hover, setHover] = useState(false);
+  const [like, setLike] = useState(false);
 
   const handleEnter = () => {
     setHover(true);
@@ -19,12 +20,12 @@ const Photo = (props) => {
     axios({
       method: "get",
       url: `${props.imgURL}`,
-      responseType: "arraybuffer",
+      responseType: "arraybuffer"
     })
-      .then((response) => {
+      .then(response => {
         fileDownload(response.data, `${props.description}.jpg`);
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(props.imgURL);
 
         console.log(err.message);
@@ -33,6 +34,14 @@ const Photo = (props) => {
           new Uint8Array(err.response.data)
         );
       });
+  };
+
+  const handleLike = () => {
+    if (like === true) {
+      setLike(false);
+    } else {
+      setLike(true);
+    }
   };
 
   return (
@@ -51,6 +60,19 @@ const Photo = (props) => {
             onClick={() => handleDownload()}
           >
             <Download className={styles.downloadIcon} />
+          </button>
+
+          <button
+            className={`${styles.likeButton} ${like === true &&
+              styles.likeTrue}`}
+            onClick={() => handleLike()}
+          >
+            {like === false && (
+              <i className={`heart outline icon ${styles.heart}`} />
+            )}
+            {like === true && <i className={`heart icon ${styles.heart}`} />}
+            {like === false && props.likes}
+            {like === true && props.likes + 1}
           </button>
         </div>
       )}

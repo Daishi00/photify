@@ -8,11 +8,11 @@ class Login extends Component {
   state = {
     name: "",
     password: "",
-    message: "",
+    message: ""
   };
 
   // pobranie i ustawienie wartości input
-  onFormChange = (e) => {
+  onFormChange = e => {
     const { name, value } = e.target;
     this.setState(() => {
       return { [name]: value };
@@ -20,13 +20,13 @@ class Login extends Component {
   };
 
   refresh = () => {
-    setTimeout(function () {
+    setTimeout(function() {
       window.location.reload();
     }, 100);
   };
 
   //  pobranie danych z formularza
-  onFormSubmit = async (e) => {
+  onFormSubmit = async e => {
     e.preventDefault();
     const { name, password } = this.state;
 
@@ -35,16 +35,16 @@ class Login extends Component {
     axios
       .post("/auth", {
         name: name,
-        password: password,
+        password: password
       })
-      .then((response) => {
+      .then(response => {
         // zapisywanie statusu, jako token do localStorage
         localStorage.setItem("status", response.data);
 
         this.setState({ message: "Success!" });
         this.refresh();
       })
-      .catch((error) => {
+      .catch(error => {
         this.setState({ message: error.response.data });
         console.log(`login error ${error.response.data}`);
       });
@@ -127,7 +127,7 @@ class Login extends Component {
                   style={{
                     color: "green",
                     display: "flex",
-                    justifyContent: "center",
+                    justifyContent: "center"
                   }}
                 >
                   {this.state.message}
@@ -137,7 +137,7 @@ class Login extends Component {
                   style={{
                     color: "red",
                     display: "flex",
-                    justifyContent: "center",
+                    justifyContent: "center"
                   }}
                 >
                   {this.state.message}

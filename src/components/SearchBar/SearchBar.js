@@ -10,15 +10,15 @@ const SearchBar = () => {
   useEffect(() => {
     axios({
       method: "GET",
-      url: `/photos`,
+      url: `/photos`
     })
-      .then(async (res) => {
+      .then(async res => {
         await setData(res.data.reverse());
       })
-      .catch((err) => console.log(err));
+      .catch(err => console.log(err));
   }, []);
 
-  const filteredPhotos = data.filter((data) => {
+  const filteredPhotos = data.filter(data => {
     return data.tags.toLowerCase().includes(filter.toLowerCase());
   });
 
@@ -33,7 +33,7 @@ const SearchBar = () => {
             type="text"
             placeholder="What are you looking for? :)"
             className={styles.searchbar}
-            onChange={(e) => setFilter(e.target.value)}
+            onChange={e => setFilter(e.target.value)}
           ></input>
           {console.log(filter)}
           <div className={styles.submit}>
@@ -42,11 +42,12 @@ const SearchBar = () => {
         </form>
       </div>
       <div className={Gstyles.Gcontainer}>
-        {filteredPhotos.map((item) => (
+        {filteredPhotos.map(item => (
           <Photo
             imgURL={item.imgURL}
             user={item.user}
             description={item.description}
+            likes={item.likes}
           />
         ))}
       </div>
