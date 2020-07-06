@@ -106,17 +106,20 @@
       margin: 0;
       padding: 0;
       border: none;
-      background: #2fb964;
-      border-radius: 20px;
+      background: #cecfcf;
+      border-radius: 3px;
       display: flex;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
-      width: 33px;
-      height: 33px;
+      flex-direction: row;
+      width: 36px;
+      height: 25px;
 
       &:hover {
         cursor: pointer;
+      }
+      .number {
+        font-size: 17px;
       }
     }
     .likeTrue {
@@ -127,6 +130,11 @@
     // }
 
     .heart {
+      width: 20px;
+      height: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       margin: 0;
     }
     @keyframes fadein {

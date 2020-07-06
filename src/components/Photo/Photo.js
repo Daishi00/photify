@@ -5,9 +5,18 @@ import fileDownload from "js-file-download";
 import axios from "axios";
 import getToken from "../utils/getToken";
 import Comment from "../Comment/Comment";
-import { Button, Form, Input, Modal, Icon, Header } from "semantic-ui-react";
+import {
+  Button,
+  Form,
+  Input,
+  Modal,
+  Icon,
+  Header,
+  Divider,
+} from "semantic-ui-react";
+import ListComments from "../ListComments/ListComments";
 
-const Photo = props => {
+const Photo = (props) => {
   const [hover, setHover] = useState(false);
   const [like, setLike] = useState(false);
   const [modal, setModal] = useState(false);
@@ -27,12 +36,12 @@ const Photo = props => {
     axios({
       method: "get",
       url: `${props.imgURL}`,
-      responseType: "arraybuffer"
+      responseType: "arraybuffer",
     })
-      .then(response => {
+      .then((response) => {
         fileDownload(response.data, `${props.description}.jpg`);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(props.imgURL);
 
         console.log(err.message);
@@ -77,8 +86,9 @@ const Photo = props => {
 
             {getToken() !== "" && (
               <button
-                className={`${styles.likeButton} ${like === true &&
-                  styles.likeTrue}`}
+                className={`${styles.likeButton} ${
+                  like === true && styles.likeTrue
+                }`}
                 onClick={() => handleLike()}
               >
                 {like === false && (
@@ -87,8 +97,10 @@ const Photo = props => {
                 {like === true && (
                   <i className={`heart icon ${styles.heart}`} />
                 )}
-                {like === false && amount}
-                {like === true && amount + 1}
+                <p className={styles.number}>
+                  {like === false && amount}
+                  {like === true && amount + 1}
+                </p>
               </button>
             )}
           </div>
@@ -106,11 +118,23 @@ const Photo = props => {
               className={styles.downloadButton}
               onClick={() => handleDownload()}
               floated="right"
+              color="green"
+              style={{
+                width: "30px",
+                height: "30px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                margin: 0,
+              }}
             >
               <Download className={styles.downloadIcon} />
             </Button>
           </Modal.Header>
-          <Modal.Content image>
+          <Modal.Content
+            image
+            style={{ minHeight: "400px", maxHeight: "400px" }}
+          >
             <img
               src={`http://localhost:5000${props.imgURL}`}
               key={props.user}
@@ -119,6 +143,12 @@ const Photo = props => {
             <Modal.Description style={{ marginLeft: "50px" }}>
               <Header>Comments</Header>
               <Comment imgURL={props.imgURL} />
+              <br />
+              <br />
+              <Divider />
+              <div style={{ overflowY: "scroll", maxHeight: "150px" }}>
+                <ListComments imgURL={props.imgURL} />
+              </div>
             </Modal.Description>
           </Modal.Content>
           <Modal.Actions>
